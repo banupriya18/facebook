@@ -19,7 +19,7 @@ module.exports = {
         if (error) {
           return next(error);
 
-          res.redirect("/users");
+          return res.redirect("/users");
         }
       });
     })(req, res, next);

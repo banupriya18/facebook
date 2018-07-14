@@ -4,24 +4,17 @@ const Post = require("../models/Post");
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
-  Post.find(
-    {},
-    [],
-    {
-      sort: {
-        createdAt: "desc",
-      },
-    },
-    function(err, posts) {
-      if (err) {
-        return res.send("error");
-      }
-
-      res.render("wall", {
-        posts: posts,
-      });
+  Post.find({}, [], {
+    sort: {
+      createdAt: "desc"
     }
-  );
+  })
+    .populate("comments")
+    .exec(function(err, posts) {
+      res.render("wall", {
+        posts: posts
+      });
+    });
 });
 
 module.exports = router;

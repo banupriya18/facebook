@@ -30,13 +30,29 @@ block content
         .post
           .card
             .card-body
-              p= post.content
-            .card-footer
+              div.flex
+                img.img-circle(src="https://picsum.photos/40/40")
+                div.ml-3
+                  .card-title.mb-0.color-title Banu priya
+                  .card-subtitle.text-muted.subtitle July 14
+              p.ml-5= post.content
+              
+              hr
+              .comments
+                ul.list-group
+                  each comment in post.comments
+                    div.flex
+                      img.img-comment.img-circle(src="https://picsum.photos/80/80")
+                      div
+                        li.comment-text= comment.content
+                        a.ml-3.no-underline(href="#") Like
+                        span.ml-2 2h
+
+            .card-footer.border-0.comment-box-display
                 form(method="POST" action="/posts/" + post.id + "/comments")
                   .flex
-                    input.form-control(type="text" placeholder="Say something, nice...").mr8
-                    button.btn.btn-sm.btn-warning(type="submit") Comment
-          .comments
-            ul.list-group
-              each comment in post.comments
-                li.list-group-item= comment.content
+                    img.img-comment.img-circle(src="https://picsum.photos/80/80")
+                    input.ml-1.comment-box.form-control(type="text" required autocomplete="off" name="comment" placeholder="Say something, nice...").mr8
+                    
+          
+                

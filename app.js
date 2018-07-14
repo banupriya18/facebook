@@ -11,7 +11,9 @@ const passport = require("./config/passport");
 const isAuthenticated = require("./middleware/isAuthenticated");
 const MongoDBStore = require("connect-mongo")(session);
 
-const Post = require('./models/Post');
+const Post = require("./models/Post");
+const Comment = require("./models/Comment");
+
 
 const authenticationRouter = require("./routes/auth");
 const signupRouter = require("./routes/signup");
@@ -50,11 +52,11 @@ app.use(
     saveUninitialized: false,
     cookie: {
       secure: false,
-      maxAge: ONE_WEEK,
+      maxAge: ONE_WEEK
     },
     store: new MongoDBStore({
-      mongooseConnection: mongoose.connection,
-    }),
+      mongooseConnection: mongoose.connection
+    })
   })
 );
 
@@ -68,12 +70,33 @@ app.use("/signup", signupRouter);
 app.use("/", indexRouter);
 app.post("/posts", function(req, res) {
   const post = req.body.post;
+  Post.create(
+    {
+      content: post,
+      user: "5b376770adc189407f6b9bc4"
+    },
+    function(err, post) {
+      res.redirect("/");
+    }
+  );
+});
 
-  Post.create({
-    content: post,
-    user: "5b3788f7781e422c6e3e5322",
-  }, function (err, post) {
-    res.redirect("/");
+app.post("/posts/:id/comments", function(req, res) {
+  const id = req.params.id;
+  Post.findById(id, function(err, post) {
+    const comment = req.body.comment;
+    Comment.create(
+      {
+        content: comment,
+        user: "5b376770adc189407f6b9bc4",
+        post: req.params.id
+      },
+      function(err, comment) {
+        post.comments.push(comment);
+        post.save();
+        res.redirect('/');
+      }
+    );
   });
 });
 

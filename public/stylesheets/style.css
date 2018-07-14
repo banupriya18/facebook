@@ -21,3 +21,46 @@
 .mr8 {
   margin-right: 8px;
 }
+img{
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+.color-title{
+  color:#4468b0;
+  font-weight: 600;
+}
+.img-circle{
+  border-radius:3rem;
+  background-color: rgba(2, 0, 4, 0.4) !important;
+}
+.cmt-img-circle{
+  border-radius:2rem;
+}
+.subtitle{
+  font-size:16px;
+}
+.comment-box-display{
+  background-color:transparent !important;
+}
+.comment-text{
+  background: #EEF1F3 !important;
+  border-radius: 1rem;
+  padding: 8px 10px !important;
+  margin-left: 10px;
+}
+.img-comment{
+  /*border: grey !important;*/
+  width:30px !important;
+  height:30px !important;
+}
+.no-undeline{
+  text-decoration: none;
+}
+.comment-box{
+  border-radius: 3rem !important;  
+  height:30px;
+  background-color:#EEF1F3 !important;
+  
+}
+.comment-style{
+  border: 0;
+}
