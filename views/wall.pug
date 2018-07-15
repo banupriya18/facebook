@@ -33,10 +33,13 @@ block content
               div.flex
                 img.img-circle(src="https://picsum.photos/40/40")
                 div.ml-3
-                  .card-title.mb-0.color-title Banu priya
+                  a.card-title.mb-0.color-title(href="") Banu priya
                   .card-subtitle.text-muted.subtitle July 14
               p.ml-5= post.content
-              
+              span.ml-5.text-warning.show-likes(id=post.id) #{post.likes} Likes
+              a.ml-2.no-underline(href="" class="post-like" data-post-id=post.id data-likeable-type="post") Like
+              span.ml-2 #{moment(post.createdAt).fromNow()}
+
               hr
               .comments
                 ul.list-group
@@ -45,8 +48,9 @@ block content
                       img.img-comment.img-circle(src="https://picsum.photos/80/80")
                       div
                         li.comment-text= comment.content
-                        a.ml-3.no-underline(href="#") Like
-                        span.ml-2 2h
+                        span.ml-3.text-warning.show-likes(id=comment.id) #{comment.likes} Likes
+                        a.ml-2.no-underline(href="" class="comment-like" data-comment-id=comment.id data-likeable-type="comment") Like
+                        span.ml-2 #{moment(comment.createdAt).fromNow()}
 
             .card-footer.border-0.comment-box-display
                 form(method="POST" action="/posts/" + post.id + "/comments")
